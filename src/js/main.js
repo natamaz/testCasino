@@ -4,11 +4,11 @@ window.addEventListener('load', () => {
   document.body.classList.remove('preload');
 });
 
-
 //preloader
 const preloader = document.getElementById("preloader");
 const fireworks = document.getElementById("fireworks");
 const text = preloader.textContent.trim();
+
 preloader.textContent = "";
 text.split("").forEach(char => {
   const span = document.createElement("span");
@@ -38,6 +38,7 @@ gsap.to(".letter", {
     }, 3000);
   }
 });
+
 function launchSparkFireworksInWaves(total = 3000, delay = 80) {
   let launched = 0;
   const interval = setInterval(() => {
@@ -63,7 +64,6 @@ function launchOneFirework() {
     spark.style.backgroundColor = randomColor();
     firework.appendChild(spark);
   }
-
   fireworks.appendChild(firework);
   setTimeout(() => firework.remove(), 1000);
 }
@@ -78,6 +78,7 @@ const symbols = ["cherry", "lemon", "banan", "seven", "watermelon"];
 const result = document.getElementById("result");
 const spinBtn = document.getElementById("btn-play");
 const reels = Array.from({length: 5}, (_, i) => document.getElementById(`reel${i + 1}`));
+
 function spin() {
   result.textContent = "";
   spinBtn.disabled = true;
@@ -139,7 +140,6 @@ function checkWin() {
       showJackpotAnimation();
       showFallingStars();
     }
-
   } else {
     result.textContent = "Try again!";
   }
@@ -186,7 +186,6 @@ function showFallingStars() {
   }
 }
 function showJackpotAnimation() {
-
   const overlay = document.createElement("div");
   overlay.style.position = "fixed";
   overlay.style.top = 0;
@@ -243,7 +242,6 @@ function showJackpotAnimation() {
     duration: 0.6,
     ease: "power2.out",
     onComplete: () => {
-      // Убрать через 2.5 сек
       explodeConfetti();
       gsap.to(overlay, {
         delay: 2,
@@ -316,15 +314,11 @@ function explodeConfetti() {
       ctx.restore();
     });
   }
-
   function animate() {
     draw();
     requestAnimationFrame(animate);
   }
-
   animate();
-
-  // Удалить canvas после 3 сек
   setTimeout(() => {
     canvas.remove();
   }, 3000);
@@ -346,15 +340,12 @@ function generateStars(count = 120) {
   }
 }
 generateStars();
-
 function responsiveScale() {
   const machine = document.getElementById("wrapper");
   if (!machine) return;
   let scale = 1;
-
   if (window.innerWidth < 480) scale = 0.75;
   else if (window.innerWidth < 768) scale = 0.9;
-
   gsap.to(machine, {
     scale: scale,
     duration: 0.6,
